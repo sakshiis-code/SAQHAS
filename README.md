@@ -1,11 +1,5 @@
 # SAQHAS — Smart Air Quality and Health Advisory System
 
-**Minor Project | B.Tech CSE | Medicaps University, Indore**
-Team: Radhika Sawle · Rashmi Chhokar · Sakshi Sharma
-Guides: Dr. Manish Korde · Prof. Swati Vaidya | JAN–JUNE 2026
-
----
-
 ## Project Overview
 
 SAQHAS is a web application that fetches real-time air quality data from public APIs, computes the Air Quality Index (AQI) per **CPCB India standards**, and delivers **personalized health advisories** based on the user's health profile. A scikit-learn ML model provides short-term AQI forecasts. The system also includes an Arduino sensor simulation layer using Wokwi and Tinkercad.
@@ -51,9 +45,9 @@ saqhas/
 
 ## Tech Stack
 
-| Layer       | Technology                                      |
+| Layer       | Technology                                     |
 |-------------|------------------------------------------------|
-| Frontend    | React.js 18, Chart.js 4, Tailwind CSS (via CDN) |
+| Frontend    | React.js 18, Chart.js 4, Tailwind CSS (via CDN)|
 | Backend     | Node.js 18+, Express.js, Mongoose              |
 | Database    | MongoDB Atlas (free M0 tier)                   |
 | ML Service  | Python 3.10+, scikit-learn, Flask, gunicorn    |
@@ -119,7 +113,7 @@ Copy `backend/.env.example` to `backend/.env` and fill in:
 | `MONGODB_URI`         | MongoDB Atlas connection string                  |
 | `JWT_SECRET`          | Strong random string for JWT signing             |
 | `GMAIL_USER`          | Gmail address for Nodemailer                     |
-| `GMAIL_APP_PASSWORD`  | Gmail App Password (not your account password)  |
+| `GMAIL_APP_PASSWORD`  | Gmail App Password (not your account password)   |
 | `VAPID_PUBLIC_KEY`    | Generate with: `npx web-push generate-vapid-keys`|
 | `VAPID_PRIVATE_KEY`   | (same command as above)                          |
 | `ML_SERVICE_URL`      | URL of deployed Flask service on Render          |
@@ -131,14 +125,14 @@ Copy `backend/.env.example` to `backend/.env` and fill in:
 
 | Req ID       | Feature                                                      | Status    |
 |--------------|--------------------------------------------------------------|-----------|
-| REQ-AQI-001  | Fetch PM2.5, PM10, CO, NO2, SO2, O3 from OpenWeatherMap     | ✓ Done    |
+| REQ-AQI-001  | Fetch PM2.5, PM10, CO, NO2, SO2, O3 from OpenWeatherMap      | ✓ Done    |
 | REQ-AQI-002  | Fetch AQI + dominant pollutant from IQAir                    | ✓ Done    |
 | REQ-AQI-003  | Compute overall AQI using CPCB sub-index breakpoints         | ✓ Done    |
 | REQ-AQI-004  | Classify into 6 bands: Good → Severe                         | ✓ Done    |
 | REQ-AQI-005  | Cache API responses ≥10 min per city (node-cache)            | ✓ Done    |
 | REQ-AQI-006  | Stale data warning if cached data > 1 hour old               | ✓ Done    |
 | REQ-HAE-001  | 6 bands × 4 profiles advisory matrix (24 unique messages)    | ✓ Done    |
-| REQ-HAE-002  | Plain-language advisories with specific recommended action    | ✓ Done    |
+| REQ-HAE-002  | Plain-language advisories with specific recommended action   | ✓ Done    |
 | REQ-HAE-003  | Save health profile to MongoDB for registered users          | ✓ Done    |
 | REQ-HAE-004  | Advisory panel updates without page reload                   | ✓ Done    |
 | REQ-VIZ-001  | Pollutant sub-index cards for all 6 pollutants               | ✓ Done    |
@@ -152,7 +146,7 @@ Copy `backend/.env.example` to `backend/.env` and fill in:
 | REQ-NOT-002  | Email alerts via Nodemailer (Gmail SMTP)                     | ✓ Done    |
 | REQ-NOT-003  | Default threshold 150; users can set 50–400                  | ✓ Done    |
 | REQ-NOT-004  | 1-hour cooldown between repeated alerts per city             | ✓ Done    |
-| REQ-SIM-001  | Arduino sketch for MQ-135, PMS5003, DHT22 tested on Wokwi   | ✓ Done    |
+| REQ-SIM-001  | Arduino sketch for MQ-135, PMS5003, DHT22 tested on Wokwi    | ✓ Done    |
 | REQ-SIM-002  | Tinkercad breadboard wiring diagram documented               | ✓ Done    |
 | REQ-SIM-003  | Wokwi screenshots + Tinkercad diagram for report             | ✓ Done    |
 
@@ -204,14 +198,14 @@ Copy `backend/.env.example` to `backend/.env` and fill in:
 
 ## AQI Reference Scale (CPCB India)
 
-| Band         | Range   | Meaning                                           |
-|--------------|---------|---------------------------------------------------|
-| Good         | 0–50    | Minimal health impact                             |
-| Satisfactory | 51–100  | Minor discomfort to sensitive individuals         |
-| Moderate     | 101–200 | Breathing discomfort to sensitive people          |
+| Band         | Range   | Meaning                                            |
+|--------------|---------|----------------------------------------------------|
+| Good         | 0–50    | Minimal health impact                              |
+| Satisfactory | 51–100  | Minor discomfort to sensitive individuals          |
+| Moderate     | 101–200 | Breathing discomfort to sensitive people           |
 | Poor         | 201–300 | Breathing difficulty for most on prolonged exposure|
-| Very Poor    | 301–400 | Respiratory illness with prolonged exposure       |
-| Severe       | 401–500 | Affects healthy people; emergency for sensitive   |
+| Very Poor    | 301–400 | Respiratory illness with prolonged exposure        |
+| Severe       | 401–500 | Affects healthy people; emergency for sensitive    |
 
 ---
 
